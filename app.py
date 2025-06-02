@@ -21,6 +21,9 @@ def init_db():
             ''')
             conn.commit()
 
+# Inicializa a tabela quando o app carrega
+init_db()
+
 @app.route('/')
 def index():
     if not DATABASE_URL:
@@ -42,6 +45,7 @@ def enviar():
                 conn.commit()
     return redirect('/')
 
+# Não precisa rodar o app direto no deploy, o gunicorn vai cuidar disso
 if __name__ == '__main__':
-    init_db()  # execute só 1 vez para criar tabela localmente
     app.run(debug=True)
+
