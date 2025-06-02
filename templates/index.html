@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correio Emo-elegante</title>
+
+    <!-- Fonte gótica emo -->
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+
+    <style>
+        h1 {
+            font-family: 'UnifrakturCook', cursive;
+        }
+    </style>
+</head>
+<body class="emo1">
+    <header>
+        <h1>Correio Emo-elegante</h1>
+        <div class="emoji-switcher">
+            <span onclick="setTheme('emo1')">😈</span>
+            <span onclick="setTheme('emo2')">👹</span>
+        </div>
+    </header>
+
+    <main>
+        <form action="/enviar" method="POST">
+            <textarea name="message" placeholder="Envie um recADEMO para seu crush…" required></textarea>
+            <input type="hidden" name="theme" id="themeInput" value="emo1">
+            <button type="submit">Enviar anonimamente</button>
+        </form>
+
+        <section class="mural">
+            {% for msg in messages %}
+            <div class="quadro {{ msg.theme }}">
+                <span class="emoji">{{ '😈' if msg.theme == 'emo1' else '👹' }}</span>
+                <p>{{ msg.content }}</p>
+            </div>
+            {% endfor %}
+        </section>
+    </main>
+
+    <footer>
+        <img src="/static/ufabcemos_logo.png" alt="Logo UFABCemos">
+        <p>
+            <a href="https://www.instagram.com/ufabcemos" target="_blank">@ufabcemos</a> |
+            <a href="https://linktr.ee/ufabcemos" target="_blank">linktr.ee/ufabcemos</a>
+        </p>
+    </footer>
+
+    <script>
+        function setTheme(theme) {
+            document.body.className = theme;
+            document.getElementById('themeInput').value = theme;
+        }
+    </script>
+</body>
+</html>
+

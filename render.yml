@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: correio-emo-elegante
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn app:app
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: correioemo-db
+          property: connectionString
+
+databases:
+  - name: correioemo-db
+    databaseName: correioemo
+    user: marilol
